@@ -1,121 +1,98 @@
 1. Basic SQL Commands
 SELECT - Retrieve data from a table
 
-sql
-Copy code
+ 
 SELECT * FROM table_name;
 SELECT DISTINCT - Retrieve unique values
 
-sql
-Copy code
+ 
 SELECT DISTINCT column_name FROM table_name;
 WHERE - Filter records
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE condition;
 AND - Combine multiple conditions
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE condition1 AND condition2;
 OR - Alternative condition
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE condition1 OR condition2;
 ORDER BY - Sort results
 
-sql
-Copy code
+ 
 SELECT * FROM table_name ORDER BY column_name ASC/DESC;
 LIMIT - Restrict the number of results
 
-sql
-Copy code
+ 
 SELECT * FROM table_name LIMIT number;
 BETWEEN - Filter within a range
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE column_name BETWEEN value1 AND value2;
 IN - Filter within a set of values
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE column_name IN (value1, value2, ...);
 LIKE - Pattern matching
 
-sql
-Copy code
+ 
 SELECT * FROM table_name WHERE column_name LIKE 'pattern';
 2. Aggregate Functions
 COUNT - Count rows
 
-sql
-Copy code
+ 
 SELECT COUNT(column_name) FROM table_name;
 SUM - Calculate the total
 
-sql
-Copy code
+ 
 SELECT SUM(column_name) FROM table_name;
 AVG - Calculate the average
 
-sql
-Copy code
+ 
 SELECT AVG(column_name) FROM table_name;
 MIN - Find the minimum
 
-sql
-Copy code
+ 
 SELECT MIN(column_name) FROM table_name;
 MAX - Find the maximum
 
-sql
-Copy code
+ 
 SELECT MAX(column_name) FROM table_name;
 GROUP BY - Group data by column
 
-sql
-Copy code
+ 
 SELECT column_name, COUNT(*) FROM table_name GROUP BY column_name;
 HAVING - Filter groups
 
-sql
-Copy code
+ 
 SELECT column_name, COUNT(*) FROM table_name GROUP BY column_name HAVING COUNT(*) > value;
 3. Joining Tables
 INNER JOIN - Retrieve matching rows
 
-sql
-Copy code
+ 
 SELECT * FROM table1 INNER JOIN table2 ON table1.column = table2.column;
 LEFT JOIN - Retrieve all rows from the left table and matching rows from the right table
 
-sql
-Copy code
+ 
 SELECT * FROM table1 LEFT JOIN table2 ON table1.column = table2.column;
 RIGHT JOIN - Retrieve all rows from the right table and matching rows from the left table
 
-sql
-Copy code
+ 
 SELECT * FROM table1 RIGHT JOIN table2 ON table1.column = table2.column;
 FULL OUTER JOIN - Retrieve all rows when there is a match in either table
 
-sql
-Copy code
+ 
 SELECT * FROM table1 FULL OUTER JOIN table2 ON table1.column = table2.column;
 SELF JOIN - Join a table with itself
 
-sql
-Copy code
+ 
 SELECT a.column_name, b.column_name FROM table_name a, table_name b WHERE condition;
 4. Set Operations
 UNION - Combine the result of two queries (no duplicates)
 
-sql
-Copy code
+ 
 SELECT column_name FROM table1 UNION SELECT column_name FROM table2;
 UNION ALL - Combine results, including duplicates
 
