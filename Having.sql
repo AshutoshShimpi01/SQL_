@@ -1,7 +1,14 @@
 select  dept,count(*) from Employee
 group by dept
-having max(marks) > 85
+having max(salary) > 85
 order by dept asc ;
+
+
+
+select dept
+from Employee
+group by dept
+having max(salary) > 95;
 
 
 
@@ -18,6 +25,13 @@ customer_id	first_name	last_name	age	country
 4	           John	      Reinhardt 25	 UK
 5	            Betty	       Doe	  28	
 
+
+
+SELECT dept, COUNT(empid) AS employee_count  
+FROM Employee  
+GROUP BY dept  
+HAVING SUM(CASE WHEN salary > 85 THEN 1 ELSE 0 END) > 0  
+ORDER BY dept ASC;
 
 country	customers
 UAE	      1
