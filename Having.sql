@@ -1,3 +1,15 @@
+- Its filters the group result.
+  its filter data after group by clause
+  and where filter data before group by hence we use having coz filter group data.
+
+group departments and sort each departments which employee size is more than 2.
+
+  select count(*),department
+  from employee
+  group by department
+  having count(*) > 2;
+
+  
 select  dept,count(*) from Employee
 group by dept
 having max(salary) > 85
