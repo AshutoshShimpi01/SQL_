@@ -16,6 +16,15 @@ order by dept;
 
 -------------------
 
+display the count of empolyee which r working under different manager
+
+select count(empid),manager from employee 
+group by manager;
+
+-------------------
+
+
+
 
 
 
