@@ -23,8 +23,15 @@ group by manager;
 
 -------------------
 
+Display those employees whose names are exactly the same
+length as their manager's name.
 
+SELECT name, manager
+FROM employee
+WHERE LENGTH(name) = LENGTH(manager);
 
+-------------------
 
+     
 
 
