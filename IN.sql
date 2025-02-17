@@ -15,3 +15,6 @@ Return all customers that have NOT placed any orders in the Orders table:
 
 SELECT * FROM Customers
 WHERE CustomerID NOT IN (SELECT CustomerID FROM Orders);
+
+select ename
+from employee where dept_no in (10,20,30);
