@@ -16,3 +16,13 @@ END);
 'sai','18'
 'shruti','21'
 'vinod','25'
+
+
+
+
+select COUNTRY_ID,COUNTRY_NAME,
+CASE
+     when COUNTRY_NAME like 'A%' then COUNTRY_ID
+else 'Not'
+end as COUNTry
+from hr.COUNTRIES;
