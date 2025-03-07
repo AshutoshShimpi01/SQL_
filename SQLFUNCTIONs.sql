@@ -8,7 +8,10 @@ select (length(name) -length(replace(name,'as',''))) / length('as') from student
 
 
 -sh
-select (length(name) -length(replace(name,'sh',''))) / length('sh') from student;
+select (length(name) -length(replace(name,'sh',''))) / length('sh') from student;  -- Query gives float value.
+
+using round() function it gives int value-
+select round((length(name) -length(replace(name,'sh',''))) / length('sh')) from student;
 
 
 -find how many times a char repeated in sentence
