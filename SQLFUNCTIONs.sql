@@ -1,3 +1,8 @@
+-change a char in sentance with aa
+  select length('i am ashutosh') ,
+replace('i am ashutosh','a','aa');
+
+
 
 -find how many times a char repeated in name
 select length(name) -length(replace(name,'a','')) from student;
