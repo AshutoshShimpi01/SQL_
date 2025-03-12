@@ -21,7 +21,7 @@ Rename Table-	  ALTER TABLE old_name RENAME TO new_name;	                 Change
 Add Column- 	ALTER TABLE employees ADD COLUMN age INT;	                  Adds a new column
 Modify Column-	ALTER TABLE employees MODIFY COLUMN age VARCHAR(3);	     Changes column data type
 Rename Column-	ALTER TABLE employees RENAME COLUMN salary TO monthly_salary;  Renames a column
-Drop Column	ALTER-    TABLE employees DROP COLUMN age;                            Removes a column
+Drop Column-	        ALTER TABLE employees DROP COLUMN age;                            Removes a column
 Add Primary Key-	ALTER TABLE employees ADD PRIMARY KEY (emp_id);	             Adds a primary key
 Drop Primary Key-	ALTER TABLE employees DROP PRIMARY KEY;	                   Removes a primary key
 Add Foreign Key-	ALTER TABLE employees ADD FOREIGN KEY (dept_id) REFERENCES departments(dept_id);	Adds a foreign key
