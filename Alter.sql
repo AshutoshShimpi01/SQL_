@@ -18,7 +18,7 @@ rename column W_Id to wid;  - rename column name
 
 Operation	                    Command	                                        Purpose
 Rename Table-	  ALTER TABLE old_name RENAME TO new_name;	                 Changes table name
-Add Column	ALTER -    TABLE employees ADD COLUMN age INT;	                  Adds a new column
+Add Column- 	ALTER TABLE employees ADD COLUMN age INT;	                  Adds a new column
 Modify Column-	ALTER TABLE employees MODIFY COLUMN age VARCHAR(3);	     Changes column data type
 Rename Column-	ALTER TABLE employees RENAME COLUMN salary TO monthly_salary;  Renames a column
 Drop Column	ALTER-    TABLE employees DROP COLUMN age;                            Removes a column
