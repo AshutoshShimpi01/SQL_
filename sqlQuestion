@@ -1,0 +1,6 @@
+if you want to delete data inside city column only 
+
+  update Customers
+  set city = '';
+
+
