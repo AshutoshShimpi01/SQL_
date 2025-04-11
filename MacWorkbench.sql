@@ -262,6 +262,44 @@ select distinct * from EMPLOYEE;
 
 
 
+ROP TABLE IF EXISTS student;
+
+
+
+drop table department;
+alter table department rename to dept;
+
+
+CREATE TABLE department (
+  dept_id INT PRIMARY KEY AUTO_INCREMENT,
+  dept_name VARCHAR(100) NOT NULL UNIQUE,
+  hod_name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO student (
+  first_name, last_name, gender, date_of_birth, email, phone, address,
+  city, state, postal_code, country, dept_id, course, year_of_enrollment, marks, grade
+) VALUES
+('Amit', 'Sharma', 'Male', '2002-06-15', 'amit.sharma@email.com', '9876543210', '12 Main St', 'Delhi', 'DL', '110001', 'India', 1, 'B.Tech', 2020, 85.50, 'A'),
+('Sneha', 'Patel', 'Female', '2001-08-22', 'sneha.patel@email.com', '9876543211', '34 Lake Rd', 'Mumbai', 'MH', '400001', 'India', 2, 'B.E.', 2019, 78.00, 'B'),
+('Rohan', 'Verma', 'Male', '2003-01-10', 'rohan.verma@email.com', '9876543212', '89 Hill St', 'Pune', 'MH', '411001', 'India', 3, 'B.Tech', 2021, 88.75, 'A'),
+('Priya', 'Singh', 'Female', '2002-11-30', 'priya.singh@email.com', '9876543213', '21 Park Lane', 'Chennai', 'TN', '600001', 'India', 4, 'B.E.', 2020, 82.00, 'B+'),
+('Ankit', 'Yadav', 'Male', '2001-04-09', 'ankit.yadav@email.com', '9876543214', '76 Sector 5', 'Jaipur', 'RJ', '302001', 'India', 5, 'B.Tech', 2019, 74.25, 'C'),
+('Kavya', 'Nair', 'Female', '2003-03-17', 'kavya.nair@email.com', '9876543215', '98 Ocean Dr', 'Kochi', 'KL', '682001', 'India', 1, 'B.Tech', 2021, 91.00, 'A+'),
+('Dev', 'Joshi', 'Male', '2002-12-01', 'dev.joshi@email.com', '9876543216', '65 Hilltop', 'Ahmedabad', 'GJ', '380001', 'India', 2, 'B.E.', 2020, 80.00, 'B'),
+('Nisha', 'Rao', 'Female', '2001-09-12', 'nisha.rao@email.com', '9876543217', '54 Central Rd', 'Hyderabad', 'TS', '500001', 'India', 3, 'B.Tech', 2019, 76.30, 'B'),
+('Aarav', 'Kapoor', 'Male', '2000-07-04', 'aarav.kapoor@email.com', '9876543218', '34 Rose Ave', 'Bangalore', 'KA', '560001', 'India', 4, 'B.E.', 2018, 69.50, 'C+'),
+('Megha', 'Dutta', 'Female', '2002-02-20', 'megha.dutta@email.com', '9876543219', '11 Palm Street', 'Kolkata', 'WB', '700001', 'India', 5, 'B.Tech', 2020, 87.25, 'A');
+
+INSERT INTO department (dept_id, dept_name, hod_name) VALUES
+(1, 'Computer Science', 'Dr. A. Sharma'),
+(2, 'Mechanical Engineering', 'Dr. B. Verma'),
+(3, 'Electrical Engineering', 'Dr. C. Rao'),
+(4, 'Civil Engineering', 'Dr. D. Patel'),
+(5, 'Information Technology', 'Dr. E. Mehra');
+
+select * from department;
+
 
 
 
