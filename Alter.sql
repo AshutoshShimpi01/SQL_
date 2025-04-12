@@ -12,6 +12,8 @@ alter table worker
 rename column W_Id to wid;  - rename column name
 
 
+alter table worker drop column manager;
+
 
 
 
