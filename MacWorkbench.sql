@@ -304,6 +304,27 @@ select * from department;
 
 
 
+DROP TABLE worker;
+
+-- Then recreate the table
+CREATE TABLE worker (
+  empid INT PRIMARY KEY,
+  name VARCHAR(50),
+  dept VARCHAR(50),
+  marks INT,
+  manager VARCHAR(50)
+);
+
+INSERT INTO worker (empid, name, dept, marks, manager) VALUES
+(1, 'Clark', 'Sales', 69, 'Ganesh'),
+(2, 'Dave', 'Accounting', 86, 'Kartik'),
+(3, 'gotya', 'Sales', 81, 'Ganesh'),
+(4, 'DEV', 'Sales', 98, 'Ganesh'),
+(5, 'Clark', 'Sales', 69, 'Ganesh'),
+(6, 'nayan', 'Accounting', 86, 'Kartik');
+
+
+
 
 
 
