@@ -1,4 +1,4 @@
-find all student detais and their dept_names from dept table , starting from max marks.
+--find all student detais and their dept_names from dept table , starting from max marks.
 
 select * from (select *, row_number() over(partition by dept_id) r from student s
 where dept_id in (select dept_id,department_name from department) ;
@@ -13,10 +13,21 @@ order by s.gender
 ;
 
 
-Count of Students Per Department Who Scored More Than 80 Marks
+--Count of Students Per Department Who Scored More Than 80 Marks
 
 SELECT d.dept_name, COUNT(s.student_id) AS high_scorers
 FROM student s
 JOIN department d ON s.dept_id = d.dept_id
 WHERE s.marks > 80
 GROUP BY d.dept_name;
+
+--Department(s) with the Highest Number of Students
+
+select dept_name,count(student_id)
+from student s
+join department d
+on s.dept_id = d.dept_id
+group by dept_name 
+having count(student_id) =(
+select max(c) from
+(select dept_id,count(*) as c from student group by dept_id) x);
