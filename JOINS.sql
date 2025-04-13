@@ -39,3 +39,12 @@ from student
 where course = 'B.Tech'
 group by year_of_enrollment
 order by year_of_enrollment;
+
+--Count of Female Students Per Department
+
+select dept_name,count(gender) as Females
+from department d
+join student s
+on s.dept_id = d.dept_id
+where gender='Female'
+group by dept_name;
