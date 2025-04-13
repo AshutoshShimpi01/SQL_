@@ -48,3 +48,12 @@ join student s
 on s.dept_id = d.dept_id
 where gender='Female'
 group by dept_name;
+
+--CDepartments With Less Than 3 Students-->;
+
+select dept_name,count(student_id)
+from student s
+join department d
+on s.dept_id = d.dept_id
+group by dept_name
+having count(student_id) <3;
