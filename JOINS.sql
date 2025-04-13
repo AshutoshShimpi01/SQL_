@@ -31,3 +31,11 @@ group by dept_name
 having count(student_id) =(
 select max(c) from
 (select dept_id,count(*) as c from student group by dept_id) x);
+
+--Count of Students Enrolled Each Year, Only for B.Tech Course
+
+select year_of_enrollment,count(student_id) as BTECH_student_enr
+from student
+where course = 'B.Tech'
+group by year_of_enrollment
+order by year_of_enrollment;
