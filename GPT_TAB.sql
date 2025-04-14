@@ -60,4 +60,41 @@ FROM employees e
 JOIN projects p ON e.emp_id = p.emp_id
 GROUP BY e.emp_id, e.name;
 
+----Find employees who work in the same department as 'Alice'
+select concat(e1.name,'&', e2.name)
+from employees e1
+join employees e2
+on e1.dept_id = e2.dept_id 
+where e1.emp_id < e2.emp_id;
 
+----List the department name and the highest salary in each department.;
+
+select e.name,d.dept_name,max(e.salary) as highest_salary
+from employees e
+join departments d
+on e.dept_id = d.dept_id
+group by d.dept_name,e.name;
+
+---- List project names along with employee names who are working on them.';
+
+select p.project_name,e.name
+from employees e
+left join projects p
+on e.emp_id = p.emp_id;
+
+-- --List departments with more than one employee.;
+ 
+ select d.dept_name,count(d.dept_id)
+ from employees e
+ join departments d
+ on e.dept_id = d.dept_id
+ group by dept_name
+ having count(d.dept_id) > 1;
+
+----List all employees who are not assigned to any project.;
+
+select e.name
+from employees e
+left join projects p
+on e.emp_id = p.emp_id
+where p.emp_id is null;
