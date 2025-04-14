@@ -40,3 +40,13 @@ INSERT INTO projects (project_id, project_name, emp_id) VALUES
 (102, 'Beta', 2),
 (103, 'Gamma', 1),
 (104, 'Omega', 4);
+
+
+--JOINS Problems
+
+--Show each employee's name along with the count of projects they're working on.
+
+SELECT e.name, p.emp_id, COUNT(p.project_name) AS emp_project_count
+FROM employees e
+JOIN projects p ON e.emp_id = p.emp_id
+GROUP BY e.emp_id, e.name;
