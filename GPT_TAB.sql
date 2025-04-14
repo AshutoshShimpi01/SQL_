@@ -115,3 +115,21 @@ select e.name,p.project_name
 from employees e
 left join projects p
 on e.emp_id = p.emp_id;
+
+--List all departments where the average salary is greater than 5500.;
+
+select d.dept_name,avg(salary)
+from departments d
+join employees e
+on d.dept_id = e.dept_id
+group by dept_name
+having avg(salary) > 5500;
+
+
+--Show the total salary paid per department.;
+
+select d.dept_name,sum(salary)
+from departments d
+join employees e
+on e.dept_id = d.dept_id
+group by dept_name;
