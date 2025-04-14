@@ -24,7 +24,7 @@ GROUP BY d.dept_name;
 Select * from student where marks > 80 and dept_id in ( 
 Select dept_id from department);
 
---same using subQuery 
+--same using a correlated subquery:     scalar subquery — meaning it returns a single value (one column, one row).
 SELECT s.*, 
        (SELECT d.dept_name 
         FROM department d 
