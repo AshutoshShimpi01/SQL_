@@ -20,6 +20,17 @@ FROM student s
 JOIN department d ON s.dept_id = d.dept_id
 WHERE s.marks > 80
 GROUP BY d.dept_name;
+--not showing dept_name here
+Select * from student where marks > 80 and dept_id in ( 
+Select dept_id from department);
+
+--same using subQuery 
+SELECT s.*, 
+       (SELECT d.dept_name 
+        FROM department d 
+        WHERE d.dept_id = s.dept_id) AS dept_name
+FROM student s
+WHERE s.marks > 80;
 
 --Department(s) with the Highest Number of Students
 
