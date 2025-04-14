@@ -57,3 +57,15 @@ join department d
 on s.dept_id = d.dept_id
 group by dept_name
 having count(student_id) <3;
+
+--Find Students Who Belong to Departments With More Than 3 Students;
+
+
+SELECT * 
+FROM student 
+WHERE dept_id IN (
+    SELECT dept_id
+    FROM student
+    GROUP BY dept_id
+    HAVING COUNT(*) > 2
+);
