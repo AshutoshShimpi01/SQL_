@@ -98,3 +98,20 @@ from employees e
 left join projects p
 on e.emp_id = p.emp_id
 where p.emp_id is null;
+
+--List all project names along with the department name of the employee working on that project.;
+
+select e.emp_id,p.project_name,d.dept_name
+from projects p
+join employees e
+on p.emp_id = e.emp_id
+join departments d
+on e.dept_id = d.dept_id;
+
+--List all employees along with their project names. 
+If an employee is not assigned to any project, still show the employee.;
+
+select e.name,p.project_name
+from employees e
+left join projects p
+on e.emp_id = p.emp_id;
