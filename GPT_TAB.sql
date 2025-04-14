@@ -50,3 +50,14 @@ SELECT e.name, p.emp_id, COUNT(p.project_name) AS emp_project_count
 FROM employees e
 JOIN projects p ON e.emp_id = p.emp_id
 GROUP BY e.emp_id, e.name;
+--with their Project_names
+SELECT 
+  e.emp_id,
+  e.name,
+  COUNT(p.project_name) AS total_projects,
+  GROUP_CONCAT(p.project_name SEPARATOR ', ') AS projects -- shows all project names
+FROM employees e
+JOIN projects p ON e.emp_id = p.emp_id
+GROUP BY e.emp_id, e.name;
+
+
