@@ -1,3 +1,14 @@
+--1. List employees who work on at least one project and have a salary greater than 6000.;
+
+select e.name,count(p.emp_id)
+from employees e
+join projects p
+on e.emp_id = p.emp_id
+where e.salary > 5000
+group by p.emp_id
+having count(p.emp_id) >= 1;
+
+
 -- 2. Find employees who are not assigned to any project and work in the Finance department.;
 
 SELECT d.dept_id, e.name, d.dept_name
