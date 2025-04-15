@@ -149,5 +149,17 @@ on e.emp_id = p.emp_id
 group by p.emp_id,e.name
 having count(p.emp_id) > 1;
 
+--
+--Display all departments that don’t have any employees assigned;
+--Joins
+SELECT d.*
+FROM departments d
+LEFT JOIN employees e ON d.dept_id = e.dept_id
+WHERE e.dept_id IS NULL;
+
+--using SubQuery;
+select * from departments where dept_id not in
+(select dept_id from employees);
+
 
 
