@@ -133,3 +133,21 @@ from departments d
 join employees e
 on e.dept_id = d.dept_id
 group by dept_name;
+
+--Show employees who are working on more than one project.;
+
+select name,dept_id from employees where emp_id in(
+select emp_id
+from projects
+group by emp_id
+having count(emp_id) > 1);
+--
+select e.name,count(p.emp_id) as working_projects
+from employees e
+left join projects p
+on e.emp_id = p.emp_id
+group by p.emp_id,e.name
+having count(p.emp_id) > 1;
+
+
+
