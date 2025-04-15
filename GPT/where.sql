@@ -26,4 +26,12 @@ on e.dept_id = d.dept_id and e.dept_id = e.dept_id
 where e.name like 'A%' or e.name like '%e' 
 group by e.dept_id,e.name;
 
+--same diff strings
+
+select e.name,count(e.dept_id)
+from employees e
+join departments d
+on e.dept_id = d.dept_id and e.dept_id = e.dept_id
+where e.name like 'Z%' or e.name like '%r%' 
+group by e.dept_id,e.name;
 
