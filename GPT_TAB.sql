@@ -161,5 +161,19 @@ WHERE e.dept_id IS NULL;
 select * from departments where dept_id not in
 (select dept_id from employees);
 
+----List each department and the number of projects its employees are working on;
+
+select d.dept_name,count(d.dept_id) as no_of_emps
+from departments d
+join employees e on d.dept_id = e.dept_id
+join projects p on e.emp_id = p.emp_id
+group by d.dept_id;
+--Joins with diff approach
+SELECT d.dept_name, COUNT(p.project_id) AS project_count
+FROM departments d
+JOIN employees e ON d.dept_id = e.dept_id
+JOIN projects p ON e.emp_id = p.emp_id
+GROUP BY d.dept_name;
+
 
 
