@@ -43,3 +43,21 @@ LEFT JOIN projects p ON e.emp_id = p.emp_id
 JOIN departments d ON e.dept_id = d.dept_id
 WHERE p.emp_id IS NULL AND d.dept_name = 'Finance';
 
+--Find employees who are working on a project and have a salary greater than the average salary of all employees.;
+
+SELECT DISTINCT e.name
+FROM employees e
+JOIN projects p ON e.emp_id = p.emp_id
+WHERE e.salary > (SELECT AVG(salary) FROM employees);  -- good way
+
+--Same ways
+
+select distinct e.name
+from employees e
+join projects p
+on e.emp_id = p.emp_id
+join (select avg(salary) av from employees) e
+where e.av < e.salary;
+
+--
+
