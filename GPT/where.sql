@@ -35,3 +35,11 @@ on e.dept_id = d.dept_id and e.dept_id = e.dept_id
 where e.name like 'Z%' or e.name like '%r%' 
 group by e.dept_id,e.name;
 
+--Find employees who are not assigned to any project and work in the Finance department.;
+
+SELECT e.*
+FROM employees e
+LEFT JOIN projects p ON e.emp_id = p.emp_id
+JOIN departments d ON e.dept_id = d.dept_id
+WHERE p.emp_id IS NULL AND d.dept_name = 'Finance';
+
