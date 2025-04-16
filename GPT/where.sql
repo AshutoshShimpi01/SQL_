@@ -59,5 +59,21 @@ on e.emp_id = p.emp_id
 join (select avg(salary) av from employees) e
 where e.av < e.salary;
 
---
+--List the names of employees who work on all the projects that the 'HR' department is involved in.;
+Figure out what projects HR employees are working on
+Figure out what projects HR employees are working on ✅
+Find employees who are assigned to all those projects ✅. ---Tricky
+
+SELECT e.name
+FROM employees e
+JOIN projects p ON e.emp_id = p.emp_id
+JOIN departments d ON e.dept_id = d.dept_id
+WHERE d.dept_name <> 'HR'
+GROUP BY e.emp_id, e.name
+HAVING COUNT(DISTINCT p.project_name) = 
+    (SELECT COUNT(DISTINCT p.project_name)
+     FROM employees e
+     JOIN projects p ON e.emp_id = p.emp_id
+     JOIN departments d ON e.dept_id = d.dept_id
+     WHERE d.dept_name = 'HR');
 
