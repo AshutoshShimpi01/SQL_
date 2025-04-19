@@ -56,3 +56,23 @@ WHERE e.salary IN (
     WHERE e1.dept_id = e.dept_id
     GROUP BY e1.dept_id
 );
+
+----3. Departments with no employees assigned:
+Write a query to find all department names that have no employees assigned to them.;
+
+--My Query;
+select distinct d.dept_name
+from employees e
+right join departments d
+on e.dept_id = d.dept_id
+where e.dept_id is null;
+--ChatGpt;
+SELECT d.dept_name
+FROM departments d
+LEFT JOIN employees e ON d.dept_id = e.dept_id
+WHERE e.emp_id IS NULL;
+--ChatGpt;
+SELECT d.dept_name, COUNT(e.emp_id) AS num_employees
+FROM departments d
+LEFT JOIN employees e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
