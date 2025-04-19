@@ -37,3 +37,22 @@ where e.name like '%z%';
  join employees e on e.emp_id = p.emp_id
  join departments d on e.dept_id = d.dept_id
  where (d.dept_name = 'Operations' or d.dept_name = 'Legal') and p.project_name like '%x';
+
+--Employees with highest salary in each department:
+Write a query to find the name and salary of employees who have the highest salary within each department.;
+
+select name,salary from employees where salary in(
+select max(e.salary)
+from employees e
+join departments d
+on e.dept_id = d.dept_id
+group by d.dept_name);
+--SAME
+SELECT e.name, e.salary
+FROM employees e
+WHERE e.salary IN (
+    SELECT MAX(e1.salary)
+    FROM employees e1
+    WHERE e1.dept_id = e.dept_id
+    GROUP BY e1.dept_id
+);
