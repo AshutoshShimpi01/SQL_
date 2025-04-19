@@ -18,3 +18,13 @@ left join projects p
 on e.emp_id =p.emp_id
 join departments d on e.dept_id = d.dept_id
 where project_id is null and dept_name <> 'Marketing';
+
+
+--Display department names which have at least one employee whose name contains the letter ‘z’.;
+
+
+select DISTINCT d.dept_name
+from departments d
+join employees e
+on e.dept_id = d.dept_id
+where e.name like '%z%';
