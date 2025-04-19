@@ -28,3 +28,12 @@ from departments d
 join employees e
 on e.dept_id = d.dept_id
 where e.name like '%z%';
+
+--List all projects where the assigned employee’s department is
+ either ‘Operations’ or ‘Legal’, and the project name ends with 'x'.;
+ 
+ select p.project_name
+ from projects p
+ join employees e on e.emp_id = p.emp_id
+ join departments d on e.dept_id = d.dept_id
+ where (d.dept_name = 'Operations' or d.dept_name = 'Legal') and p.project_name like '%x';
