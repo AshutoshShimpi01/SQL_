@@ -76,3 +76,13 @@ SELECT d.dept_name, COUNT(e.emp_id) AS num_employees
 FROM departments d
 LEFT JOIN employees e ON d.dept_id = e.dept_id
 GROUP BY d.dept_name;
+
+4. Employees who have worked on projects that have the same name as their department:
+List employee names who are working on a project with the same name as their department.;
+
+select e.name
+from employees e
+join projects p
+on e.emp_id =p.emp_id
+join departments d on d.dept_id = e.dept_id
+where p.project_name = d.dept_name;
