@@ -15,3 +15,14 @@ join employees ee on ee.emp_id = em.emp_id
 group by em.emp_id
 order by h desc
 limit 3;
+
+
+--List projects that have employees from every department.;
+
+SELECT p.project_name
+FROM projects p
+JOIN employee_project_assignments epa ON p.project_id = epa.project_id
+JOIN employees e ON epa.emp_id = e.emp_id
+JOIN departments d ON e.dept_id = d.dept_id
+GROUP BY p.project_id
+HAVING COUNT(DISTINCT e.dept_id) = (SELECT COUNT(*) FROM departments);
