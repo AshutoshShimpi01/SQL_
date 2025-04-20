@@ -26,3 +26,26 @@ JOIN employees e ON epa.emp_id = e.emp_id
 JOIN departments d ON e.dept_id = d.dept_id
 GROUP BY p.project_id
 HAVING COUNT(DISTINCT e.dept_id) = (SELECT COUNT(*) FROM departments);
+
+--Find employees who have worked on a project that overlaps with the ‘Apollo’ project
+(i.e., they worked on a project that started before Apollo’s end date and ended after Apollo’s start date).;
+
+SELECT DISTINCT e.name
+FROM employees e
+JOIN employee_project_assignments epa ON e.emp_id = epa.emp_id
+JOIN projects p ON epa.project_id = p.project_id
+WHERE p.project_id != (
+    SELECT project_id
+    FROM projects
+    WHERE project_name = 'Apollo'
+)
+AND p.start_date <= (
+    SELECT end_date
+    FROM projects
+    WHERE project_name = 'Apollo'
+)
+AND p.end_date >= (
+    SELECT start_date
+    FROM projects
+    WHERE project_name = 'Apollo'
+);
