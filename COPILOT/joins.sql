@@ -7,6 +7,14 @@ group by dept_name
 order by avg(salary) desc
 limit 1;
 
+--List all projects and the number of employees assigned to each.;
+
+select project_name, count(ea.emp_id) as numb_of_employees
+from employees e
+join employee_project_assignments ea on e.emp_id = ea.emp_id
+join projects p on p.project_id = ea.project_id
+group by project_name;
+
 --List the top 3 employees with the highest total hours worked across all projects.;
 
 select ee.name,sum(hours_worked) as h
