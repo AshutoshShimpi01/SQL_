@@ -57,3 +57,10 @@ AND p.end_date >= (
     FROM projects
     WHERE project_name = 'Apollo'
 );
+
+--List project names and their total hours worked by all employees.;
+
+select p.project_name,ea.project_id, sum(hours_worked)
+from projects p
+join employee_project_assignments ea on p.project_id =ea.project_id 
+group by ea.project_id,p.project_name;
