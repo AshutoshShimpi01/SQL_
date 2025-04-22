@@ -3,6 +3,12 @@
   and where filter data before group by hence we use having coz filter group data.
 ------------------------
 
+
+--returns up to 5 departments where:
+--The department has more than 2 IT_PROG employees
+--The average salary of those IT_PROG employees is greater than 5000
+
+Sorted by highest average salary  
 SELECT department_id, AVG(salary) AS avg_salary
 FROM employees
 WHERE job_id = 'IT_PROG'
