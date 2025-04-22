@@ -24,7 +24,8 @@ GROUP BY department_id
 HAVING COUNT(*) > 5 AND SUM(salary) > 30000;
 
 
---Departments where the manually calculated average salary is > 4500.
+--Departments where the manually calculated average salary is > 4500.    (AVG(salary) == SUM(salary) / COUNT(*)  )
+
 SELECT department_id, SUM(salary) / COUNT(*) AS avg_salary
 FROM employees
 GROUP BY department_id
