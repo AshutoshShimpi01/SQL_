@@ -1,7 +1,21 @@
 - Its filters the group result.
   its filter data after group by clause
   and where filter data before group by hence we use having coz filter group data.
+------------------------
 
+SELECT department_id, AVG(salary) AS avg_salary
+FROM employees
+WHERE job_id = 'IT_PROG'
+GROUP BY department_id
+HAVING AVG(salary) > 5000 AND COUNT(*) > 2
+ORDER BY avg_salary DESC
+LIMIT 5;
+
+
+
+
+
+  
 group departments and sort each departments which employee size is more than 2.
 
   select count(*),department
