@@ -5,9 +5,15 @@ WHERE CustomerID NOT IN (SELECT CustomerID FROM Orders);
 
 
 
--find those customers_name whhose Order keyboard or mouse
+--find those customers_name whhose Order keyboard or mouse
   
 select first_name,Country from Customers
 where customer_id in
 (select  customer_id from Orders 
 where item in('Keyboard','Mouse'));
+
+--find department id who do not have any employee;
+
+select * from departments 
+where dept_id not in
+(select distinct dept_id from employees);
