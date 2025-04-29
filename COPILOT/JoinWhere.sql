@@ -15,3 +15,18 @@ where (d.dept_name,e.salary) in
 from employees e
 join departments d on e.dept_id = d.dept_id
 group by d.dept_name);
+
+
+--List employees who worked on a project from a different department.;
+He worked on a Finance department project
+→ ✅ He should be in the list (different department)
+Anita is in the HR department
+She worked on an HR department project
+→ ❌ She should not be in the list (same department)
+
+select e.name
+from employees e
+join employee_project_assignments ea on ea.emp_id = e.emp_id
+join projects p on ea.project_id = p.project_id
+join departments d on d.dept_id = e.dept_id
+WHERE e.dept_id <> p.dept_id;
