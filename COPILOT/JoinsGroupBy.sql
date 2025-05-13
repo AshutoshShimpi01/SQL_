@@ -29,4 +29,6 @@ from employees e
 join employee_project_assignments ea on e.emp_id = ea.emp_id
 join projects p on p.project_id = ea.project_id
 group by project_id,p.project_name
-having count(e.dept_id) >= 3;
+having count(e.dept_id) >= 3
+ORDER BY total_hours DESC
+LIMIT 5;;
