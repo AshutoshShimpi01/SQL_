@@ -109,3 +109,11 @@ join employee_project_assignments ep
 on e.emp_id = ep.emp_id;
 
 
+-- 10. Show each employee’s name, salary, and department average salary difference using window functions.
+
+
+select e.name,e.salary, e.dept_id,
+	 avg(e.salary) over(partition by dept_id) as dept_avg_sal,
+     e.salary - avg(e.salary) over(partition by e.dept_id) as diff
+from employees e;
+
