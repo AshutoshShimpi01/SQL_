@@ -117,3 +117,11 @@ select e.name,e.salary, e.dept_id,
      e.salary - avg(e.salary) over(partition by e.dept_id) as diff
 from employees e;
 
+
+-- 12. Show each employee and the percentage of their salary from the total salary using SUM() window function.
+
+
+select e.*,
+      sum(e.salary) over() as total_sal,
+      round(e.salary * 100 / sum(e.salary) over(), 2) as perc
+from employees e;
