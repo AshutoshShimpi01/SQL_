@@ -125,3 +125,25 @@ select e.*,
       sum(e.salary) over() as total_sal,
       round(e.salary * 100 / sum(e.salary) over(), 2) as perc
 from employees e;
+
+-- 13. Show each employee’s cumulative hours (running total) across projects ordered by project_id.
+
+
+select e.*,
+     sum(ep.hours_worked) over(partition by e.emp_id order by ep.project_id) as proj_hours
+from employees e
+join employee_project_assignments ep
+on e.emp_id = ep.emp_id;
+
+
+-- 14. For each project, rank employees by hours allocated using RANK() and DENSE_RANK().
+
+
+select p.*,
+       rank() over(partition by ep.project_id order by ep.hours_worked desc) as rn,
+       dense_rank() over(partition by ep.project_id order by ep.hours_worked desc) as d_rn
+from employees e
+join employee_project_assignments ep
+on e.emp_id = ep.emp_id
+join projects p
+on p.project_id = ep.project_id;
