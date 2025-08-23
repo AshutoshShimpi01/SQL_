@@ -6,3 +6,7 @@ with av_sal as
 select e.* from employees e
 cross join av_sal as a 
 where e.salary > a.av;
+
+select * from employees 
+where salary >
+(select avg(salary) from employees);
