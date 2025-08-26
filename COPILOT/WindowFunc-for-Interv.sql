@@ -47,3 +47,18 @@ from (
     ) x
 ) y
 where total_spent > avg_spent_region;
+
+-- Same But Best Approch for pro
+
+select *
+from (
+    select c.cust_name, c.region,
+           sum(o.total_amount) as total_spent,
+           avg(sum(o.total_amount)) over (partition by c.region) as avg_spent_region
+    from Customers c
+    join Orders o on c.cust_id = o.cust_id
+    group by c.cust_name, c.region
+) t
+where total_spent > avg_spent_region;
+
+
