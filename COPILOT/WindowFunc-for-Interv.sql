@@ -23,3 +23,27 @@ from employees e
 join departments d
 on e.dept_id = d.dept_id) x
 where x.rk < 3;
+
+
+# 2️⃣ Customers whose spending is above the average in their region (2024)
+-- cust_name, region, total_spent, avg_spent_region
+
+select *
+from (
+    select 
+        cust_name,
+        region,
+        total_spent,
+        avg(total_spent) over (partition by region) as avg_spent_region
+    from (
+        select 
+            c.cust_name,
+            c.region,
+            sum(o.total_amount) as total_spent
+        from Customers c
+        join Orders o on c.cust_id = o.cust_id
+        where o.order_date between '2024-01-01' and '2024-12-31'
+        group by c.cust_name, c.region
+    ) x
+) y
+where total_spent > avg_spent_region;
