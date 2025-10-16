@@ -60,6 +60,18 @@ AND p.end_date >= (
 
 --List project names and their total hours worked by all employees.;
 
+
+
+-- Find the employee(s) with the highest salary in each department.
+
+select x.name,x.dept_name,x.salary from
+(select e.name,d.dept_name,e.salary,
+rank() over(partition by d.dept_name order by salary desc) as rk
+from employees e
+join departments d
+on e.dept_id = d.dept_id) x
+where x.rk < 2;
+
 select p.project_name,ea.project_id, sum(hours_worked)
 from projects p
 join employee_project_assignments ea on p.project_id =ea.project_id 
