@@ -1,0 +1,27 @@
+-- List employees who worked on a same project from a different department.
+
+
+WITH ProjectDeptInfo AS (
+    SELECT
+        e.name,
+        e.dept_id,
+        ep.project_id,
+        
+        -- Find the lowest dept_id working on the project
+        MIN(e.dept_id) OVER (PARTITION BY ep.project_id) AS min_dept_id,
+        
+        -- Find the highest dept_id working on the project
+        MAX(e.dept_id) OVER (PARTITION BY ep.project_id) AS max_dept_id
+    FROM
+        employee_project_assignments ep
+    JOIN
+        employees e ON ep.emp_id = e.emp_id
+)
+SELECT DISTINCT
+    name
+FROM
+    ProjectDeptInfo
+WHERE
+    -- If the minimum dept_id is different from the maximum dept_id, 
+    -- it means at least two different departments worked on the project.
+    min_dept_id != max_dept_id;
