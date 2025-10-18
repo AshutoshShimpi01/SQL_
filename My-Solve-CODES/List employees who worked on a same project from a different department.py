@@ -1,6 +1,30 @@
 -- List employees who worked on a same project from a different department.
 
 
+
+WITH ProjectDeptCounts AS (
+    SELECT
+        e.name,
+        e.dept_id,
+        ep.project_id,
+        COUNT(DISTINCT e.dept_id) OVER (PARTITION BY ep.project_id) AS distinct_dept_count
+    FROM
+        employee_project_assignments ep
+    JOIN
+        employees e ON ep.emp_id = e.emp_id
+)
+SELECT DISTINCT
+    name
+FROM
+    ProjectDeptCounts
+WHERE
+    distinct_dept_count > 1;
+
+
+--------------
+EXPLINATION-
+--------------
+
 WITH ProjectDeptInfo AS (
     SELECT
         e.name,
