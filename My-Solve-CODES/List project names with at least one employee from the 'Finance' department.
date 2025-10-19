@@ -1,0 +1,17 @@
+
+
+-- List project names with at least one employee from the 'Finance' department.
+
+solved by me without any AI help............100%                      (at least one employee)   this line is imp
+
+select p.project_name,count(e.emp_id)
+from employees e
+join departments d
+on d.dept_id = e.dept_id
+join employee_project_assignments ep
+on e.emp_id = ep.emp_id
+join projects p
+on p.project_id = ep.project_id
+where d.dept_name = 'Finance'
+group by p.project_name
+having count(e.emp_id) >= 1;
