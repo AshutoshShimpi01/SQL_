@@ -1,0 +1,68 @@
+
+
+
+
+Orders 
+
+order_id, order_date, cust_id, total_amountt  
+
+Customers
+
+cust_id,  cust_name, region
+
+Top 3 customers by total spending in year 2024 for each region.
+(cust_name,region,total_spnt)
+
+-----
+my logic       (not correct need to improve)
+-------
+select c.cust_name,
+sum(o.total_amount) over(partition by o.region order by o.total_amount) as total_amt_per_region,
+rank() over(order by c.region desc) as rk 
+from Customers c
+join orders o
+on c.cust_id = o.cust_id
+where o.order_date between '01-01-2024' and '31-12-2024'
+and rk < 4;
+
+
+----
+Ans
+----
+
+WITH CustomerSpending AS (
+    -- Step 1: Calculate total spending per customer, per region, for 2024
+    SELECT
+        C.cust_name,
+        C.region,
+        SUM(O.total_amount) AS total_spent
+    FROM
+        Customers C
+    JOIN
+        Orders O ON C.cust_id = O.cust_id
+    WHERE
+        O.order_date BETWEEN '2024-01-01' AND '2024-12-31'
+    GROUP BY
+        C.cust_name, C.region -- Group to get the total spent by the customer
+),
+RankedCustomers AS (
+    -- Step 2: Rank customers by spending within each region
+    SELECT
+        cust_name,
+        region,
+        total_spent,
+        -- Partition by region, order by spending DESC
+        RANK() OVER(PARTITION BY region ORDER BY total_spent DESC) AS rk
+    FROM
+        CustomerSpending
+)
+-- Step 3: Filter for the top 3
+SELECT
+    cust_name,
+    region,
+    total_spent
+FROM
+    RankedCustomers
+WHERE
+    rk <= 3;
+
