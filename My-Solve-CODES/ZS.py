@@ -31,38 +31,27 @@ Ans
 ----
 
 WITH CustomerSpending AS (
-    -- Step 1: Calculate total spending per customer, per region, for 2024
-    SELECT
-        C.cust_name,
-        C.region,
+    SELECT C.cust_name, C.region,
         SUM(O.total_amount) AS total_spent
-    FROM
-        Customers C
-    JOIN
-        Orders O ON C.cust_id = O.cust_id
-    WHERE
-        O.order_date BETWEEN '2024-01-01' AND '2024-12-31'
-    GROUP BY
-        C.cust_name, C.region -- Group to get the total spent by the customer
+    FROM Customers C
+    JOIN Orders O ON C.cust_id = O.cust_id
+    WHERE O.order_date BETWEEN '2024-01-01' AND '2024-12-31'
+    GROUP BY C.cust_name, C.region 
 ),
 RankedCustomers AS (
-    -- Step 2: Rank customers by spending within each region
     SELECT
         cust_name,
         region,
         total_spent,
-        -- Partition by region, order by spending DESC
         RANK() OVER(PARTITION BY region ORDER BY total_spent DESC) AS rk
-    FROM
-        CustomerSpending
+    FROM CustomerSpending
 )
--- Step 3: Filter for the top 3
-SELECT
-    cust_name,
-    region,
-    total_spent
-FROM
-    RankedCustomers
-WHERE
-    rk <= 3;
+SELECT cust_name,region,total_spent
+FROM RankedCustomers
+WHERE rk <= 3;
 
+
+
+explination
+use cte the throu that cte fetch req column and make ranking
+then using ranking cte fetch record from select Query;
