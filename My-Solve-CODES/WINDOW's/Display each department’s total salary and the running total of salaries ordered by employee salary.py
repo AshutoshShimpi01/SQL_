@@ -25,8 +25,17 @@ The query's goal is to produce a result that looks like this:
 | IT            | 200000                       | 450000 |
 
 
-***
+running_total_salary cumulative means :-
+-----------------------------
+Row,Salary,Running Total
+1,"$10,000","$10,000"
+2,"$20,000","$30,000 ($10k+$20k)"
+3,"$30,000","$60,000 ($30k+$30k)"
+4,"$40,000","$100,000 ($60k+$40k)"
 
+
+
+----------------------
 ### Explanation of Output Columns
 
 1.  **`total_dept_salary`**: This is the result of an aggregated window function (`SUM(salary) OVER(PARTITION BY dept_name)`). 
