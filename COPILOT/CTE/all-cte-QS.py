@@ -1,4 +1,5 @@
-
+those all maximum amt of Quesrions are solved by me without any help.....
+-----------------------------------------------------
 
 Got it. I'll provide 10 SQL questions at an **intermediate level**, focusing on the **Top N per Group** and essential multi-step aggregation patterns, mapped to your simplified schema. All solutions should be achieved using **CTEs (`WITH` clause)** for good practice.
 
