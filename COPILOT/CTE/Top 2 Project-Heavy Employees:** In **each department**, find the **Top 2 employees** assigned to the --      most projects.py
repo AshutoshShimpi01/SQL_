@@ -23,3 +23,65 @@ from tp
 )
 select name,dept_name,ct from rk
 where rr <= 2;
+
+
+
+
+
+
+
+-- 100% my   (gives correct output by gim9ni says not)
+
+select e.name, d.dept_name, count(ep.project_id) as prj_ct
+from employees e
+join departments d on d.dept_id = e.dept_id
+join employee_project_assignments ep on e.emp_id = ep.emp_id
+group by e.name, d.dept_name
+order by prj_ct desc;
+
+
+
+
+
+
+----_GIMINI
+
+
+WITH EmployeeProjectCount AS (
+    -- 1. Calculate the total number of projects for each employee
+    SELECT
+        e.emp_id,
+        e.name,
+        d.dept_name,
+        COUNT(ep.project_id) AS prj_ct
+    FROM
+        employees e
+    JOIN
+        departments d ON d.dept_id = e.dept_id
+    JOIN
+        employee_project_assignments ep ON e.emp_id = ep.emp_id
+    GROUP BY
+        e.emp_id, e.name, d.dept_name
+),
+RankedEmployees AS (
+    -- 2. Rank employees based on project count *within* their department
+    SELECT
+        name,
+        dept_name,
+        prj_ct,
+        -- Rank resets for each department (PARTITION BY) and orders by project count (DESC)
+        RANK() OVER (PARTITION BY dept_name ORDER BY prj_ct DESC) AS rk
+    FROM
+        EmployeeProjectCount
+)
+-- 3. Select only those employees whose rank is 1 or 2
+SELECT
+    name,
+    dept_name,
+    prj_ct
+FROM
+    RankedEmployees
+WHERE
+    rk <= 2
+ORDER BY
+    dept_name, prj_ct DESC;
