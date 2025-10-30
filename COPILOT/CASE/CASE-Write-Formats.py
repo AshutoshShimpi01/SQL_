@@ -1,5 +1,147 @@
 
 
+Certainly\! Here are the core formats of the SQL `CASE` statement with simple, direct examples for each, showing where they are most effectively used.
+
+-----
+
+## 1\. Searched CASE Expression (The Most Flexible Format)
+
+This format checks for different **Boolean conditions** in each `WHEN` clause and is best for handling ranges, inequalities, or different logical checks.
+
+| Format | Purpose |
+| :--- | :--- |
+| **Placement:** | Used in `SELECT`, `ORDER BY`, `WHERE`, etc. |
+| **Syntax:** | `CASE WHEN condition1 THEN result1 [WHEN condition2 THEN result2] [ELSE else_result] END` |
+
+### Simple Example: Classifying Numbers
+
+**Goal:** Label a number as 'Positive', 'Negative', or 'Zero'.
+
+```sql
+SELECT
+    value_column,
+    CASE
+        WHEN value_column > 0  THEN 'Positive'
+        WHEN value_column < 0  THEN 'Negative'
+        ELSE 'Zero' -- Covers the case where value_column = 0 or NULL
+    END AS Sign_Label
+FROM
+    MyNumbers;
+```
+
+-----
+
+## 2\. Simple CASE Expression (The Equality Format)
+
+This format compares a single input expression to a list of exact values. It's cleaner than the Searched format when only checking for equality.
+
+| Format | Purpose |
+| :--- | :--- |
+| **Placement:** | Used in `SELECT`, `ORDER BY`, etc. |
+| **Syntax:** | `CASE input_expression WHEN value1 THEN result1 [WHEN value2 THEN result2] [ELSE else_result] END` |
+
+### Simple Example: Mapping Code to Name
+
+**Goal:** Convert a single-digit status code into a readable status word.
+
+```sql
+SELECT
+    status_code,
+    CASE status_code
+        WHEN 1 THEN 'Active'
+        WHEN 2 THEN 'Pending'
+        WHEN 3 THEN 'Canceled'
+        ELSE 'Unknown'
+    END AS Status_Name
+FROM
+    Orders;
+```
+
+-----
+
+## 3\. Conditional Aggregation (Pivoting/Summarizing Data)
+
+This technique uses the `CASE` statement **inside an aggregate function** (`SUM`, `COUNT`, `AVG`) to perform separate calculations in a single query row.
+
+| Format | Purpose |
+| :--- | :--- |
+| **Placement:** | Used only in `SELECT` with an aggregate function. |
+| **Syntax:** | `AGGREGATE_FUNCTION(CASE WHEN condition THEN column_to_aggregate ELSE 0/NULL END)` |
+
+### Simple Example: Summing Positive and Negative Values
+
+**Goal:** Calculate the sum of positive values and the sum of negative values in two separate columns (as you requested previously).
+
+```sql
+SELECT
+    -- Sums only values > 0 (returns 0 for negative/zero values)
+    SUM(CASE WHEN Value > 0 THEN Value ELSE 0 END) AS Total_Gain,
+
+    -- Sums only values < 0 (returns 0 for positive/zero values)
+    SUM(CASE WHEN Value < 0 THEN Value ELSE 0 END) AS Total_Loss,
+    
+    -- Counts only values > 0 (COUNT ignores NULL)
+    COUNT(CASE WHEN Value > 0 THEN 1 END) AS Count_Gain_Events
+FROM
+    Transactions;
+```
+
+-----
+
+## 4\. Custom Sorting (`ORDER BY` Clause)
+
+This uses the `CASE` result as a sorting key to enforce a non-alphabetical or non-numeric order.
+
+| Format | Purpose |
+| :--- | :--- |
+| **Placement:** | Used only in `ORDER BY`. |
+| **Syntax:** | `ORDER BY CASE WHEN condition THEN sort_value [ELSE default_sort_value] END` |
+
+### Simple Example: Ordering by Priority
+
+**Goal:** Sort rows so 'High' comes first, 'Medium' second, and 'Low' last, regardless of alphabetical order.
+
+```sql
+SELECT
+    task_name,
+    priority
+FROM
+    Tasks
+ORDER BY
+    -- Assigns 1, 2, 3 as the temporary sort key
+    CASE priority
+        WHEN 'High'   THEN 1
+        WHEN 'Medium' THEN 2
+        WHEN 'Low'    THEN 3
+        ELSE 4 -- Default for any other priority type
+    END,
+    task_name ASC; -- Secondary sort by name
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 The `CASE` statement is incredibly versatile in SQL. Here are several common use cases, demonstrating its different writing formats (Simple vs. Searched) and placements within a query (`SELECT`, `ORDER BY`, and **Conditional Aggregation**).
 
 -----
