@@ -7,6 +7,28 @@
 
 
 
+-- 100% my  
+
+with ch as
+(select e.name, d.dept_name, count(ep.project_id) as project_count,
+row_number() over(partition by e.dept_id order by count(ep.project_id) desc) as rrk
+from employees e
+join departments d on e.dept_id = d.dept_id
+join employee_project_assignments ep on ep.emp_id = e.emp_id
+group by name, dept_name, d.dept_id)
+select * 
+from ch
+where rrk < 3;
+
+
+
+
+
+
+
+
+
+
 with tp as
 (select e.emp_id,e.name,d.dept_name,
 count(ep.project_id) as ct
@@ -23,24 +45,6 @@ from tp
 )
 select name,dept_name,ct from rk
 where rr <= 2;
-
-
-
-
-
-
-
--- 100% my   (gives correct output by gim9ni says not)
-
-select e.name, d.dept_name, count(ep.project_id) as prj_ct
-from employees e
-join departments d on d.dept_id = e.dept_id
-join employee_project_assignments ep on e.emp_id = ep.emp_id
-group by e.name, d.dept_name
-order by prj_ct desc;
-
-
-
 
 
 
