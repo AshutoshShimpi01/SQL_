@@ -16,9 +16,9 @@ from employees;
 self written
 
 select
-sum(case when dept_name = 'Engineering' then salary end) as Engineering_sal,
-sum(case when dept_name = 'Marketing' then salary end) as Engineering_sal,
-sum(case when dept_name = 'Finance' then salary end) as Engineering_sal,
-sum(case when dept_name = 'HR' then salary end) as Engineering_sal
+sum(case when dept_name = 'Engineering' then salary end) as Total_Engineering_sal,
+sum(case when dept_name = 'Marketing' then salary end) as Total_Marketing_sal,
+sum(case when dept_name = 'Finance' then salary end) as Total_Finance_sal,
+sum(case when dept_name = 'HR' then salary end) as Total_HR_sal
 from departments d
 join employees e on e.dept_id = d.dept_id;
