@@ -1,5 +1,5 @@
 
--- top 2 employees Have more in each dept
+-- top 2 employees Have more salary in each dept
 
 select * from 
 (select e.*,d.dept_name,
